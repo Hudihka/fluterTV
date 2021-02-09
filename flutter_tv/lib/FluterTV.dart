@@ -22,7 +22,8 @@ class ListTVState extends State<ListTV> {
       body: Container(
         child: ListView(
           //таблица
-          children: _buildList(),
+          children: _buildList(), //ячейки
+
         ),
       ),
       floatingActionButton: FloatingActionButton(
@@ -33,41 +34,59 @@ class ListTVState extends State<ListTV> {
   }
 
   List<Widget> _buildList() {
-    return _data.map((DataTV f) => GestureDetector(
-                    child: ListTile(
-                  subtitle: Text(f.username),
-                  title: Text(f.name),
-                  leading: CircleAvatar(
-                    child: Text(f.id.toString()),
-                  ),
-                  trailing: Text(f.email),
-                ),
-                onTap: (){
-                  print('---------${f.name} - ${f.username}----------------');
-                },
+    return _data
+        .map(
+          (DataTV f) => Ink(
+            color: Colors.grey[50],
+            child: ListTile(
+              subtitle: Text(f.username),
+              title: Text(f.name),
+              leading: CircleAvatar(
+                child: Text(f.id.toString()),
               ),
-      
-              
-            )
+              trailing: Text(f.email),
+              onTap: (){
+                print('---------${f.name} - ${f.username}----------------');
+              },
+            ),
+          )
+          
+          
+          
+          // GestureDetector(
+          //   child: ListTile(
+          //     subtitle: Text(f.username),
+          //     title: Text(f.name),
+          //     leading: CircleAvatar(
+          //       child: Text(f.id.toString()),
+          //     ),
+          //     trailing: Text(f.email),
+          //   ),
+          //   onTap: () {
+          //     print('---------${f.name} - ${f.username}----------------');
+          //   },
+          // ),
+
+
+
+        )
         .toList();
   }
 
-  _getListData() {
-    List<Widget> widgets = [];
+// ListView(
+//   children: [
+//     Ink(
+//       color: Colors.lightGreen,
+//       child: ListTile(
+//         title: Text('With lightGreen background'),
+//         onTap() { },
+//       ),
+//     ),
+//   ],
+// );
 
-    for (int i = 0; i < 100; i++) {
-      widgets.add(GestureDetector(
-        child: Padding(
-          padding: EdgeInsets.all(10.0),
-          child: Text("Row $i"),
-        ),
-        onTap: () {
-          print('row tapped');
-        },
-      ));
-    }
-    return widgets;
-  }
+
+
 
   void _loadCC() async {
     //await значит выполняется на другом потоке
