@@ -16,7 +16,7 @@ class ListTV extends StatefulWidget {
 
 class ListTVState extends State<ListTV> {
   
-  List<DataTV> data = [];
+  List<DataTV> _data = [];
 
 
   @override
@@ -38,7 +38,7 @@ class ListTVState extends State<ListTV> {
   }
 
   List<Widget> _buildList() {
-    return data.map((DataTV f) => ListTile(
+    return _data.map((DataTV f) => ListTile(
       subtitle: Text(f.username),
       title: Text(f.name),
       leading: CircleAvatar(child: Text(f.id.toString()),),
@@ -52,25 +52,13 @@ class ListTVState extends State<ListTV> {
     if (response.statusCode == 200){
        var tagObjsJson = jsonDecode(response.body) as List;
        List<DataTV> datasObjs = tagObjsJson.map((tagJson) => DataTV.fromJson(tagJson)).toList();
+       _data = datasObjs;
+       setState(() { });
 
-      print(datasObjs);
-      print(datasObjs.first.email);
-
-      // var allData = json.decode(response.body) as List<<String, dynamic>>;
-      // List<DataTV> dataList = [];
-
-      // allData.forEach((key, value) { 
-      //   var record = DataTV(
-      //     name: value['name'], 
-      //     username: value['username'],
-      //     id: value['id'],
-      //     email: value['email']
-      //   );
-      //   dataList.add(record);
-      // });
-
-      // print(dataList);
     }
+
   }
+
+
 
 }
