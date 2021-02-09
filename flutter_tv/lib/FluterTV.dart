@@ -20,11 +20,19 @@ class ListTVState extends State<ListTV> {
         title: Text('TV Application'),
       ),
       body: Container(
-        child: ListView(
-          //таблица
-          children: _buildList(), //ячейки
+        child: ListView.builder( //это динамически меняющ таблица
+          itemCount: _data.length,
+          itemBuilder: (BuildContext context, int position) {
+            return _cellForIndex(position);
+          }),
+        
+        
+        
+        // ListView( //это простая таблица
+        //   //таблица
+        //   children: _buildList(), //ячейки
 
-        ),
+        // ),
       ),
       floatingActionButton: FloatingActionButton(
         child: Icon(Icons.refresh),
@@ -33,59 +41,45 @@ class ListTVState extends State<ListTV> {
     );
   }
 
-  List<Widget> _buildList() {
-    return _data
-        .map(
-          (DataTV f) => Ink(
-            color: Colors.grey[50],
+  Widget _cellForIndex(int index){
+    DataTV obj = _data[index];
+    return Ink(
+            color: Colors.grey[50], //выделение ячейки
             child: ListTile(
-              subtitle: Text(f.username),
-              title: Text(f.name),
+              subtitle: Text(obj.username),
+              title: Text(obj.name),
               leading: CircleAvatar(
-                child: Text(f.id.toString()),
+                child: Text(obj.id.toString()),
               ),
-              trailing: Text(f.email),
+              trailing: Text(obj.email),
               onTap: (){
-                print('---------${f.name} - ${f.username}----------------');
+                print('---------${obj.name} - ${obj.username}----------------');
               },
             ),
-          )
-          
-          
-          
-          // GestureDetector(
-          //   child: ListTile(
-          //     subtitle: Text(f.username),
-          //     title: Text(f.name),
-          //     leading: CircleAvatar(
-          //       child: Text(f.id.toString()),
-          //     ),
-          //     trailing: Text(f.email),
-          //   ),
-          //   onTap: () {
-          //     print('---------${f.name} - ${f.username}----------------');
-          //   },
-          // ),
-
-
-
-        )
-        .toList();
+          );
   }
 
-// ListView(
-//   children: [
-//     Ink(
-//       color: Colors.lightGreen,
-//       child: ListTile(
-//         title: Text('With lightGreen background'),
-//         onTap() { },
-//       ),
-//     ),
-//   ],
-// );
 
-
+  // List<Widget> _buildList() {
+  //   return _data
+  //       .map(
+  //         (DataTV f) => Ink(
+  //           color: Colors.grey[50], //выделение ячейки
+  //           child: ListTile(
+  //             subtitle: Text(f.username),
+  //             title: Text(f.name),
+  //             leading: CircleAvatar(
+  //               child: Text(f.id.toString()),
+  //             ),
+  //             trailing: Text(f.email),
+  //             onTap: (){
+  //               print('---------${f.name} - ${f.username}----------------');
+  //             },
+  //           ),
+  //         )
+  //       )
+  //       .toList();
+  // }
 
 
   void _loadCC() async {
