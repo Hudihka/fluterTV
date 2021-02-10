@@ -20,7 +20,7 @@ class ListTVState extends State<ListTV> {
         title: Text('TV Application'),
       ),
       body: Container(
-        child: ListView.builder( //это динамически меняющ таблица
+        child: ListView.builder( //это динамически меняющ таблица те если много ячеек
           itemCount: _data.length,
           itemBuilder: (BuildContext context, int position) {
             return _cellForIndex(position);
@@ -41,7 +41,7 @@ class ListTVState extends State<ListTV> {
     );
   }
 
-  Widget _cellForIndex(int index){
+  Widget _cellForIndex(int index){ //ячейка по индексу
     DataTV obj = _data[index];
     return Ink(
             color: Colors.grey[50], //выделение ячейки
@@ -58,29 +58,6 @@ class ListTVState extends State<ListTV> {
             ),
           );
   }
-
-
-  // List<Widget> _buildList() {
-  //   return _data
-  //       .map(
-  //         (DataTV f) => Ink(
-  //           color: Colors.grey[50], //выделение ячейки
-  //           child: ListTile(
-  //             subtitle: Text(f.username),
-  //             title: Text(f.name),
-  //             leading: CircleAvatar(
-  //               child: Text(f.id.toString()),
-  //             ),
-  //             trailing: Text(f.email),
-  //             onTap: (){
-  //               print('---------${f.name} - ${f.username}----------------');
-  //             },
-  //           ),
-  //         )
-  //       )
-  //       .toList();
-  // }
-
 
   void _loadCC() async {
     //await значит выполняется на другом потоке
